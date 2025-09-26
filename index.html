@@ -12,6 +12,354 @@
     
     <!-- CSS -->
     <style>
+
+/* تنسيق موحد للأقسام */
+.service-section {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 0;
+    margin: 20px 0;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-section:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.service-section h2 {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: var(--white);
+    padding: 15px 20px;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+}
+
+.service-section h2:hover {
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+}
+
+.service-section h2 .toggle-icon {
+    transition: transform 0.3s;
+    font-size: 0.8rem;
+}
+
+.service-section h2.open .toggle-icon {
+    transform: rotate(90deg);
+}
+
+.service-section .section-content {
+    list-style: none;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.service-section .section-content.show {
+    max-height: 2000px;
+}
+
+.service-section .section-content li {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--gray-light);
+    transition: background 0.2s;
+}
+
+.service-section .section-content li:last-child {
+    border-bottom: none;
+}
+
+.service-section .section-content li:hover {
+    background: var(--gray-light);
+}
+
+/* تنسيق موحد للعناصر داخل الأقسام */
+.service-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.service-icon {
+    color: var(--primary-color);
+    font-size: 24px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: rgba(0, 98, 51, 0.1);
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.service-item:hover .service-icon {
+    background: rgba(0, 98, 51, 0.2);
+}
+
+.service-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.service-content {
+    flex: 1;
+}
+
+.service-link {
+    color: var(--primary-dark);
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.service-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.service-link:hover::after {
+    width: 100%;
+}
+
+.service-link:hover {
+    color: var(--accent-color);
+}
+
+.service-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* تنسيق موحد للأقسام الفرعية */
+.subsection {
+    border-bottom: 1px solid var(--gray-light);
+    transition: all 0.3s ease;
+}
+
+.subsection:last-child {
+    border-bottom: none;
+}
+
+.subsection h3 {
+    background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+    color: var(--primary-dark);
+    padding: 12px 20px;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 0;
+}
+
+.subsection h3:hover {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+}
+
+.subsection h3.open {
+    background: linear-gradient(135deg, #c3e6cb 0%, #b1dfbb 100%);
+}
+
+.subsection-icon {
+    color: var(--primary-color);
+    font-size: 20px;
+    width: 24px;
+    margin-left: 8px;
+}
+
+.subsection-count {
+    background: rgba(0, 98, 51, 0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    color: var(--primary-dark);
+}
+
+.subsection-content {
+    list-style: none;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    background: #fafafa;
+}
+
+.subsection-content.show {
+    max-height: 2000px;
+}
+
+.subsection-content li {
+    padding: 12px 20px;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.subsection-content li:last-child {
+    border-bottom: none;
+}
+
+.subsection-content li:hover {
+    background: #f0f0f0;
+}
+
+/* تنسيق أرقام الهاتف */
+.phone-number {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    direction: ltr;
+    unicode-bidi: embed;
+    display: inline-block;
+    background: rgba(0, 98, 51, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--primary-dark);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.phone-number:hover {
+    background: rgba(0, 98, 51, 0.2);
+    color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+/* أرقام الطوارئ باللون الأحمر */
+.emergency-number {
+    background: rgba(165, 42, 42, 0.1);
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.emergency-number:hover {
+    background: rgba(165, 42, 42, 0.2);
+    color: var(--accent-dark);
+}
+
+.contact-info.emergency {
+    color: var(--accent-color);
+}
+
+.emergency-icon {
+    color: var(--accent-color);
+}
+
+/* تأثيرات بصرية إضافية */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.service-item {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.service-section h2 {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-10px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .service-section h2 {
+        font-size: 1rem;
+        padding: 12px 15px;
+    }
+    
+    .service-section .section-content li {
+        padding: 10px 15px;
+    }
+    
+    .subsection h3 {
+        padding: 10px 15px;
+        font-size: 0.95rem;
+    }
+    
+    .subsection-content li {
+        padding: 10px 15px;
+    }
+    
+    .service-item {
+        gap: 10px;
+    }
+    
+    .service-icon {
+        font-size: 20px;
+        width: 28px;
+        height: 28px;
+    }
+    
+    .service-logo {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-section h2 {
+        padding: 10px 15px;
+    }
+    
+    .service-section .section-content li {
+        padding: 8px 12px;
+    }
+    
+    .subsection h3 {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .subsection-content li {
+        padding: 8px 12px;
+    }
+    
+    .service-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .service-icon, .service-logo {
+        align-self: flex-start;
+    }
+}
+
         :root {
             --primary-color: #006233;
             --primary-light: #00894d;
@@ -715,7 +1063,6 @@
         </section>
         
         <!-- Services Sections -->
-        <!-- سيتم إضافة الأقسام هنا -->
 <!-- قسم الدفع الإلكتروني للفواتير - نسخة محسنة -->
 <section>
     <h2 id="toggle-payment" onclick="toggleSection(this)">
@@ -4800,136 +5147,7 @@
     </div>
 </section>
 
-<style>
-    /* تنسيقات خاصة للنماذج */
-    .form-container {
-        padding: 20px;
-        background: var(--gray-light);
-        border-radius: var(--border-radius);
-        margin-bottom: 20px;
-    }
-    
-    .form-group {
-        margin-bottom: 20px;
-    }
-    
-    .form-group label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 600;
-        color: var(--primary-dark);
-    }
-    
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid var(--gray-medium);
-        border-radius: var(--border-radius);
-        font-size: 1rem;
-        transition: border-color 0.3s;
-    }
-    
-    .form-group input:focus,
-    .form-group textarea:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 0 2px rgba(0, 98, 51, 0.1);
-    }
-    
-    .submit-button {
-        background-color: var(--accent-color);
-        color: var(--white);
-        border: none;
-        padding: 12px 30px;
-        border-radius: var(--border-radius);
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-    }
-    
-    .submit-button:hover {
-        background-color: var(--accent-light);
-    }
-    
-    .submit-button:disabled {
-        background-color: var(--gray-medium);
-        cursor: not-allowed;
-    }
-    
-    #form-status {
-        margin-top: 15px;
-        padding: 10px;
-        border-radius: var(--border-radius);
-        display: none;
-    }
-    
-    .form-success {
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-        display: block !important;
-    }
-    
-    .form-error {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-        display: block !important;
-    }
-    
-    .comments-list {
-        margin-top: 30px;
-    }
-    
-    .comment-item {
-        background: var(--white);
-        padding: 15px;
-        margin-bottom: 15px;
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow);
-    }
-    
-    .comment-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--gray-light);
-    }
-    
-    .comment-name {
-        font-weight: 600;
-        color: var(--primary-dark);
-    }
-    
-    .comment-email {
-        color: var(--accent-color);
-        font-size: 0.9rem;
-    }
-    
-    .comment-text {
-        line-height: 1.6;
-    }
-    
-    .loading {
-        display: inline-block;
-        width: 16px;
-        height: 16px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: #fff;
-        animation: spin 1s ease-in-out infinite;
-    }
-    
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-</style>
+
 
 <script>
     // دالة إرسال النموذج
@@ -5018,24 +5236,296 @@
     });
 </script>
 
+    <!-- قسم معلومات الاتصال -->
+    <section>
+        <h2 id="toggle-14" onclick="toggleSection('contact-info', this)">
+            <span><i class="fas fa-address-book"></i> معلومات الاتصال </span>
+            <span class="toggle-icon">▶</span>
+        </h2>
 
+        <ul id="contact-info" class="content">
+            <li><i class="fas fa-envelope" style="color: #006400;"></i> البريد الإلكتروني:
+                <a href="mailto:tabaniimadeddine@gmail.com">tabaniimadeddine@gmail.com</a>
+            </li>
+            <li><i class="fas fa-phone-alt" style="color: #006400;"></i> الهاتف:
+                <a href="tel:+213697743721">+213697743721</a>
+            </li>
+            <li><i class="fas fa-map-marker-alt" style="color: #006400;"></i> العنوان: الجزائر العاصمة</li>
+            <li><i class="fab fa-facebook-square" style="color: #006400;"></i>
+                <a href="https://www.facebook.com/" target="_blank">صفحتنا على فايسبوك</a>
+            </li>
+        </ul>
+    </section>
 
+    <!-- قسم التعليقات والإستفسارات -->
+    <section>
+        <h2 onclick="toggleSection('comments-content', this)">
+            <span><i class="fas fa-comments"></i> التعليقات والاستفسارات</span>
+            <span class="toggle-icon">▶</span>
+        </h2>
 
+        <div id="comments-content" class="content">
+            <form id="commentForm"
+                action="https://docs.google.com/forms/d/e/1FAIpQLSe07UIELQ6JopTEmEF4VDVIm1n24S6ICOBLpFbb0Bg96-0KVA/formResponse"
+                method="POST" target="hidden_iframe" onsubmit="return formSubmitted();">
 
+                <label for="name"><i class="fas fa-user"></i> الاسم الكامل:</label>
+                <input name="entry.884464217" type="text" id="name" required>
 
+                <label for="email"><i class="fas fa-envelope"></i> البريد الإلكتروني:</label>
+                <input name="entry.500401844" type="email" id="email" required>
 
+                <label for="comment"><i class="fas fa-comment-dots"></i> الرسالة:</label>
+                <textarea name="entry.2136485942" id="comment" required rows="4"></textarea>
 
+                <button type="submit" id="submitButton">
+                    <i class="fas fa-paper-plane"></i> إرسال التعليق
+                </button>
 
+                <p id="statusMessage"></p>
+            </form>
 
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+            <div id="commentList" style="margin-top:30px;"></div>
+        </div>
+    </section>
 
+    <!-- قسم الاشتراك في التحديثات -->
+    <section class="subscribe-section">
+        <h2><i class="fas fa-envelope-open-text"></i> اشترك لتصلك آخر التحديثات</h2>
 
+        <!-- نموذج Google Form -->
+        <form class="subscribe-form"
+            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeRLTtPk1EI19nDKoV_dGMoR33Yy-5yA2sEi8Ylm5Z-S6X6yQ/formResponse"
+            method="POST" target="subscribe_iframe" onsubmit="return showSubscribeMsg()">
+            <input type="email" name="entry.1093766077" placeholder="أدخل بريدك الإلكتروني" required>
+            <button type="submit" id="subscribeButton">
+                <i class="fas fa-paper-plane"></i> اشتراك
+            </button>
+        </form>
 
+        <iframe name="subscribe_iframe" id="subscribe_iframe" style="display:none;"></iframe>
+        <p id="subscribeMsg"></p>
+    </section>
 
+    <!-- عداد الزيارات -->
+    <section class="counter-section">
+        <div class="daily-counter">
+            <span id="daily-visits">0</span>+
+        </div>
+        <div class="daily-label">
+            عدد الزيارات<br><small class="counter-small">اليوم</small>
+        </div>
 
+        <div class="total-counter">
+            <span id="total-visits">0</span>+
+        </div>
+        <div class="total-label">
+            عدد الزيارات منذ جوان 2025<br>
+        </div>
+    </section>
 
+    <!-- عنصر الإشعارات -->
+    <div id="notificationBox">
+        <i class="fas fa-bell"></i> إشعار جديد: مرحباً بك في موقعنا!
+    </div>
 
-
-
+    <script>
+        // دالة تبديل عرض/إخفاء المحتوى
+        function toggleSection(sectionId, element) {
+            const section = document.getElementById(sectionId);
+            const icon = element.querySelector('.toggle-icon');
+            
+            if (section.style.display === 'block') {
+                section.style.display = 'none';
+                icon.classList.remove('open');
+            } else {
+                section.style.display = 'block';
+                icon.classList.add('open');
+            }
+        }
+        
+        // دالة إرسال النموذج
+        function formSubmitted() {
+            const submitButton = document.getElementById('submitButton');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            // تعطيل الزر وإظهار مؤشر التحميل
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="loading"></span> جاري الإرسال...';
+            
+            // إخفاء رسالة الحالة السابقة
+            statusMessage.textContent = '';
+            statusMessage.className = '';
+            
+            // إرجاع true للسماح بإرسال النموذج
+            return true;
+        }
+        
+        // دالة تحميل الإطار المخفي (تُستدعى بعد إرسال النموذج)
+        function onIframeLoad() {
+            const submitButton = document.getElementById('submitButton');
+            const statusMessage = document.getElementById('statusMessage');
+            const form = document.getElementById('commentForm');
+            
+            // إعادة تمكين الزر وإعادة النص الأصلي
+            submitButton.disabled = false;
+            submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال التعليق';
+            
+            // عرض رسالة نجاح
+            statusMessage.textContent = 'تم إرسال تعليقك بنجاح! شكراً لك.';
+            statusMessage.className = 'success';
+            
+            // مسح النموذج
+            form.reset();
+            
+            // إضافة التعليق الجديد إلى القائمة (محاكاة)
+            addCommentToList();
+        }
+        
+        // دالة إضافة تعليق إلى القائمة (محاكاة)
+        function addCommentToList() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const comment = document.getElementById('comment').value;
+            
+            const commentList = document.getElementById('commentList');
+            const commentItem = document.createElement('div');
+            commentItem.className = 'comment-item';
+            
+            commentItem.innerHTML = `
+                <div class="comment-header">
+                    <span class="comment-name">${name}</span>
+                    <span class="comment-email">${email}</span>
+                </div>
+                <div class="comment-text">${comment}</div>
+            `;
+            
+            // إضافة التعليق الجديد في الأعلى
+            if (commentList.firstChild) {
+                commentList.insertBefore(commentItem, commentList.firstChild);
+            } else {
+                commentList.appendChild(commentItem);
+            }
+        }
+        
+        // دالة الاشتراك في التحديثات
+        function showSubscribeMsg() {
+            const subscribeButton = document.getElementById('subscribeButton');
+            const subscribeMsg = document.getElementById('subscribeMsg');
+            const emailInput = document.querySelector('.subscribe-form input[type="email"]');
+            
+            // تعطيل الزر وإظهار مؤشر التحميل
+            subscribeButton.disabled = true;
+            subscribeButton.innerHTML = '<span class="loading"></span> جاري الاشتراك...';
+            
+            // إخفاء الرسالة السابقة
+            subscribeMsg.textContent = '';
+            
+            // إرجاع true للسماح بإرسال النموذج
+            return true;
+        }
+        
+        // دالة تحميل إطار الاشتراك
+        function onSubscribeIframeLoad() {
+            const subscribeButton = document.getElementById('subscribeButton');
+            const subscribeMsg = document.getElementById('subscribeMsg');
+            const subscribeForm = document.querySelector('.subscribe-form');
+            
+            // إعادة تمكين الزر وإعادة النص الأصلي
+            subscribeButton.disabled = false;
+            subscribeButton.innerHTML = '<i class="fas fa-paper-plane"></i> اشتراك';
+            
+            // عرض رسالة نجاح
+            subscribeMsg.textContent = 'تم الاشتراك بنجاح! شكراً لك.';
+            subscribeMsg.style.color = 'var(--subscribe-color)';
+            
+            // مسح النموذج
+            subscribeForm.reset();
+            
+            // إظهار إشعار
+            showNotification('تم الاشتراك بنجاح في القائمة البريدية!');
+        }
+        
+        // دالة إظهار الإشعارات
+        function showNotification(message) {
+            const notificationBox = document.getElementById('notificationBox');
+            
+            if (message) {
+                notificationBox.innerHTML = `<i class="fas fa-bell"></i> ${message}`;
+            }
+            
+            notificationBox.classList.remove('hide');
+            notificationBox.classList.add('show');
+            
+            // إخفاء الإشعار تلقائياً بعد 5 ثوانٍ
+            setTimeout(() => {
+                hideNotification();
+            }, 5000);
+        }
+        
+        // دالة إخفاء الإشعارات
+        function hideNotification() {
+            const notificationBox = document.getElementById('notificationBox');
+            notificationBox.classList.remove('show');
+            notificationBox.classList.add('hide');
+        }
+        
+        // تهيئة عداد الزيارات
+        function initCounter() {
+            // محاكاة بيانات عداد الزيارات (في تطبيق حقيقي، ستأتي هذه البيانات من قاعدة البيانات)
+            const dailyVisits = Math.floor(Math.random() * 100) + 50;
+            const totalVisits = Math.floor(Math.random() * 1000) + 500;
+            
+            // تأثير عدّاد متزايد
+            animateCounter('daily-visits', 0, dailyVisits, 2000);
+            animateCounter('total-visits', 0, totalVisits, 2500);
+        }
+        
+        // دالة تأثير العدّاد المتزايد
+        function animateCounter(elementId, start, end, duration) {
+            const element = document.getElementById(elementId);
+            let startTimestamp = null;
+            
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value;
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            
+            window.requestAnimationFrame(step);
+        }
+        
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // فتح قسم معلومات الاتصال افتراضياً
+            const firstSection = document.getElementById('contact-info');
+            const firstToggle = document.getElementById('toggle-14');
+            if (firstSection && firstToggle) {
+                firstSection.style.display = 'block';
+                firstToggle.querySelector('.toggle-icon').classList.add('open');
+            }
+            
+            // ربط حدث تحميل الإطار المخفي للاشتراك
+            document.getElementById('subscribe_iframe').onload = onSubscribeIframeLoad;
+            
+            // ربط حدث النقر على الإشعار لإخفائه
+            document.getElementById('notificationBox').addEventListener('click', hideNotification);
+            
+            // تهيئة عداد الزيارات
+            initCounter();
+            
+            // إظهار إشعار ترحيبي بعد تحميل الصفحة
+            setTimeout(() => {
+                showNotification('مرحباً بك في موقعنا! نأمل أن تجد ما تبحث عنه.');
+            }, 1000);
+        });
+    </script>
 
     </main>
     
@@ -5065,20 +5555,33 @@
         setInterval(updateClock, 1000);
         updateClock();
         
-        // الطقس
         document.getElementById('weatherBox').addEventListener('click', () => {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(pos => {
-                    const { latitude, longitude } = pos.coords;
-                    // هنا يمكن إضافة API لتحميل بيانات الطقس
-                    document.getElementById('weatherInfo').textContent = "جاري تحميل بيانات الطقس...";
-                }, () => {
-                    document.getElementById('weatherInfo').textContent = "تفعيل GPS مطلوب";
-                });
-            } else {
-                document.getElementById('weatherInfo').textContent = "المتصفح لا يدعم GPS";
-            }
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      const { latitude, longitude } = pos.coords;
+
+      const apiKey = "c9600bb5dcccfb988100da9bf01b2f2f"; 
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=ar`;
+
+      document.getElementById('weatherInfo').textContent = "جاري تحميل بيانات الطقس...";
+
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('weatherInfo').textContent =
+            `الطقس: ${data.weather[0].description}, الحرارة: ${data.main.temp}°C`;
+        })
+        .catch(() => {
+          document.getElementById('weatherInfo').textContent = "تعذر تحميل بيانات الطقس";
         });
+    }, () => {
+      document.getElementById('weatherInfo').textContent = "تفعيل GPS مطلوب";
+    });
+  } else {
+    document.getElementById('weatherInfo').textContent = "المتصفح لا يدعم GPS";
+  }
+});
+
         
         // توسيع/طي الأقسام
         function toggleSection(header) {
@@ -5209,6 +5712,311 @@
                 }
             });
         });
+
+
+
+        
+// تهيئة الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    initPage();
+});
+
+function initPage() {
+    // تحديث الساعة والتاريخ
+    updateClock();
+    setInterval(updateClock, 1000);
+    
+    // تهيئة جميع الأقسام
+    initSections();
+    
+    // إعداد زر التثبيت
+    setupInstallButton();
+    
+    // إعداد البحث
+    setupSearch();
+    
+    // إعداد زر الصعود للأعلى
+    setupScrollToTop();
+    
+    // إعداد أرقام الهاتف
+    setupPhoneNumbers();
+}
+
+// تحديث الساعة والتاريخ
+function updateClock() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('clock').textContent =
+        now.toLocaleTimeString('ar-DZ', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('date').textContent =
+        now.toLocaleDateString('ar-DZ', options);
+}
+
+// تهيئة جميع الأقسام
+function initSections() {
+    // إضافة حدث النقر لجميع عناوين الأقسام
+    document.querySelectorAll('.service-section h2').forEach(header => {
+        header.addEventListener('click', function() {
+            toggleSection(this);
+        });
+    });
+    
+    // إضافة حدث النقر لجميع عناوين الأقسام الفرعية
+    document.querySelectorAll('.subsection h3').forEach(header => {
+        header.addEventListener('click', function() {
+            toggleSubsection(this);
+        });
+    });
+    
+    // فتح أول قسم افتراضيًا
+    const firstSection = document.querySelector('.service-section');
+    if (firstSection) {
+        const firstHeader = firstSection.querySelector('h2');
+        toggleSection(firstHeader);
+    }
+}
+
+// توسيع/طي الأقسام الرئيسية
+function toggleSection(header) {
+    const content = header.nextElementSibling;
+    const isVisible = content.classList.contains('show');
+    
+    // إغلاق جميع الأقسام الأخرى (اختياري)
+    // document.querySelectorAll('.section-content.show').forEach(openContent => {
+    //     if (openContent !== content) {
+    //         openContent.classList.remove('show');
+    //         openContent.previousElementSibling.classList.remove('open');
+    //     }
+    // });
+    
+    if (isVisible) {
+        content.classList.remove('show');
+        header.classList.remove('open');
+    } else {
+        content.classList.add('show');
+        header.classList.add('open');
+    }
+}
+
+// توسيع/طي الأقسام الفرعية
+function toggleSubsection(header) {
+    const content = header.nextElementSibling;
+    const isVisible = content.classList.contains('show');
+    
+    if (isVisible) {
+        content.classList.remove('show');
+        header.classList.remove('open');
+    } else {
+        content.classList.add('show');
+        header.classList.add('open');
+    }
+}
+
+// إعداد زر التثبيت
+function setupInstallButton() {
+    let deferredPrompt;
+    const installButton = document.getElementById('install-button');
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installButton.style.display = 'block';
+        
+        installButton.addEventListener('click', () => {
+            installButton.style.display = 'none';
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('تم قبول التثبيت');
+                    showNotification('تم تثبيت التطبيق بنجاح!');
+                } else {
+                    installButton.style.display = 'block';
+                }
+                deferredPrompt = null;
+            });
+        });
+    });
+    
+    window.addEventListener('appinstalled', () => {
+        installButton.style.display = 'none';
+    });
+}
+
+// إعداد البحث
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            const sections = document.querySelectorAll('.service-section');
+            
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                section.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+    }
+}
+
+// إعداد زر الصعود للأعلى
+function setupScrollToTop() {
+    window.onscroll = function() {
+        const btn = document.getElementById('scrollTopBtn');
+        if (btn) {
+            btn.style.display = (window.pageYOffset > 300) ? 'block' : 'none';
+        }
+    };
+}
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// إعداد أرقام الهاتف
+function setupPhoneNumbers() {
+    // إضافة تأثير النقر على أرقام الهاتف
+    document.querySelectorAll('.phone-number').forEach(phone => {
+        phone.addEventListener('click', function(e) {
+            e.stopPropagation();
+            // تأثير بسيط عند النقر
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+            
+            // في حالة أرقام الطوارئ، عرض تأكيد
+            if (this.classList.contains('emergency-number')) {
+                const number = this.getAttribute('href').replace('tel:', '');
+                if (confirm(`هل تريد الاتصال برقم الطوارئ ${number}؟`)) {
+                    // سيتم فتح تطبيق الهاتف تلقائيًا عبر الرابط tel:
+                } else {
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+}
+
+// المشاركة
+function sharePage() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'البوابة الجزائرية للخدمات الرقمية',
+            text: 'شارك البوابة الجزائرية للخدمات الرقمية مع أصدقائك',
+            url: window.location.href
+        });
+    } else {
+        alert('المشاركة غير مدعومة في هذا المتصفح. انسخ الرابط: ' + window.location.href);
+    }
+}
+
+// إظهار الإشعارات
+function showNotification(message) {
+    // إنشاء عنصر إشعار إذا لم يكن موجودًا
+    let notification = document.getElementById('custom-notification');
+    if (!notification) {
+        notification = document.createElement('div');
+        notification.id = 'custom-notification';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-hover);
+            z-index: 10000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            max-width: 300px;
+        `;
+        document.body.appendChild(notification);
+    }
+    
+    notification.innerHTML = `<i class="fas fa-bell"></i> ${message}`;
+    notification.style.transform = 'translateX(0)';
+    
+    // إخفاء الإشعار بعد 5 ثوان
+    setTimeout(() => {
+        notification.style.transform = 'translateX(150%)';
+    }, 5000);
+}
+
+// دالة إرسال النموذج
+function submitCommentForm() {
+    const submitButton = document.querySelector('#commentForm .submit-button');
+    const statusDiv = document.getElementById('form-status');
+    
+    // تعطيل الزر وإظهار التحميل
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<span class="loading"></span> جاري الإرسال...';
+    
+    // إخفاء رسالة الحالة السابقة
+    statusDiv.style.display = 'none';
+    statusDiv.className = '';
+    
+    // إرجاع true للسماح بالإرسال
+    return true;
+}
+
+// دالة تنفيذ بعد إرسال النموذج
+function onIframeLoad() {
+    const submitButton = document.querySelector('#commentForm .submit-button');
+    const statusDiv = document.getElementById('form-status');
+    const form = document.getElementById('commentForm');
+    
+    // إعادة تمكين الزر
+    submitButton.disabled = false;
+    submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال التعليق';
+    
+    // عرض رسالة النجاح
+    statusDiv.textContent = 'تم إرسال تعليقك بنجاح! شكراً لك على مشاركتك.';
+    statusDiv.className = 'form-success';
+    statusDiv.style.display = 'block';
+    
+    // مسح النموذج
+    form.reset();
+    
+    // إضافة التعليق إلى القائمة (محاكاة)
+    addCommentToList();
+}
+
+// دالة إضافة تعليق إلى القائمة
+function addCommentToList() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const comment = document.getElementById('comment').value;
+    
+    const commentsList = document.getElementById('comments-list');
+    const commentItem = document.createElement('div');
+    commentItem.className = 'comment-item';
+    
+    commentItem.innerHTML = `
+        <div class="comment-header">
+            <span class="comment-name">${name}</span>
+            <span class="comment-email">${email}</span>
+        </div>
+        <div class="comment-text">${comment}</div>
+    `;
+    
+    // إضافة التعليق الجديد في الأعلى
+    if (commentsList.firstChild) {
+        commentsList.insertBefore(commentItem, commentsList.firstChild);
+    } else {
+        commentsList.appendChild(commentItem);
+    }
+}
+
+// ربط حدث تحميل الإطار المخفي
+document.addEventListener('DOMContentLoaded', function() {
+    const hiddenIframe = document.getElementById('hidden_iframe');
+    if (hiddenIframe) {
+        hiddenIframe.onload = onIframeLoad;
+    }
+});
+
     </script>
+
 </body>
 </html>
